@@ -49,7 +49,7 @@
 - belongs_to :product
 - has_one :retailer
 
-## Retailer(商品購入))テーブル
+## Retailers(商品購入))テーブル
 
 | Column           | Type       | Option                        |
 | ---------------- | ---------- | ----------------------------- |
