@@ -23,9 +23,9 @@
 | ----------------------  | ---------- | ----------------------------- |
 | name                    | string     | null: false                   |
 | description             | text       | null: false                   |
-| category_id             | string     | null: false                   |
-| condition_id            | string     | null: false                   |
-| delivery_destination_id | string     | null: false                   |
+| category_id             | integer    | null: false                   |
+| condition_id            | integer    | null: false                   |
+| delivery_destination_id | integer    | null: false                   |
 | prefecture_id           | integer    | null: false                   |
 | delivery_date_id        | integer    | null: false                   |
 | price                   | integer    | null: false                   |
