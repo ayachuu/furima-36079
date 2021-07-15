@@ -12,4 +12,6 @@ class Category < ApplicationRecord
     { id: 10, name: "ハンドメイド" }
     { id: 11, name: "その他" }
   ]
+  include ActiveHash::Associations
+  has_many :products
 end
