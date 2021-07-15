@@ -10,7 +10,7 @@ class Product < ApplicationRecord
     validates :name
     validates :description
     validates :user
-    with_optins numericality: { other_than: 1 , message: "can't be blank"} do
+    with_options numericality: { other_than: 1 , message: "can't be blank"} do
       validates :category_id
       validates :condition_id
       validates :destination_id
@@ -18,6 +18,5 @@ class Product < ApplicationRecord
       validates :delivery_date_id
     end
   end
-  validates :price, presence: true, format{with: /\A[0-9]+\Z/},numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "out of setting range"}
-
+  validates :price, presence: true, format: {with: /\A[0-9]+\z/}, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "out of setting range"}
 end
