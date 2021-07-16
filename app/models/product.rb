@@ -5,6 +5,7 @@ class Product < ApplicationRecord
   belongs_to :delivery_destination_id
   belongs_to :prefecture_id
   belongs_to :delivery_date_id
+  has_one_attached :image
 
   with_options presence: true do
     validates :name
