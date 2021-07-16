@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, only: :new
+
   def index
   end
   def new
@@ -9,16 +10,16 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      redirect_to action: :index
+      redirect_to root_path
     else
-      render :new
+      render new_product_path, flash: { error: @product.errors.full_messages }
     end
   end
 
 
   private
   def product_params
-    params[:product].permit(:name, :description, :category_id, :condition_id, :delivery_destination_id, :prefecture_id, :derivery_date_id, :price).merge(user_id: current_user.id)
+    params.require(:product).permit(:name, :description, :category_id, :condition_id, :delivery_destination_id, :prefecture_id, :delivery_date_id, :price, :image).merge(user_id: current_user.id)
   end
 end
 
