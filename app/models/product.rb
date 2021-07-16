@@ -11,7 +11,8 @@ class Product < ApplicationRecord
   with_options presence: true do
     validates :name
     validates :description
-    validates :user_id
+    validates :user_id 
+    validates :image 
     with_options numericality: { other_than: 1 , message: "can't be blank"} do
       validates :category_id
       validates :condition_id
