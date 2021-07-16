@@ -23,10 +23,20 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include("Name can't be blank")
       end
+      it "商品名が４０１文字以上ある場合登録できない" do
+        @product.name= "aaaaaaaaaabbbbbbbbbbccccccccccdddddddddde"
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Name 商品名 は40文字以内で入力してください")
+      end
       it "商品の説明が空では登録できない" do
         @product.description= ""
         @product.valid?
         expect(@product.errors.full_messages).to include("Description can't be blank")
+      end
+      it "商品の説明が1,001文字以上ある場合は登録できない" do
+        @product.description= "aaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjaaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjaaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjaaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjaaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjaaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjaaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjaaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjaaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjaaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkk"
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Description 商品の説明は1,000文字以内で入力してください")
       end
       it "商品の詳細カテゴリーが空では登録できない" do
         @product.category_id= ""
@@ -58,8 +68,33 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include("Price can't be blank", "Price is invalid", "Price out of setting range")
       end
-    
+      it "販売価格が299円では登録できない" do
+        @product.price= 299
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price out of setting range")
+      end
+      it "販売価格が10,000,000円では登録できない" do
+        @product.price= 10000000
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price out of setting range")
+      end
+      it "販売価格が全角数字では登録できない" do
+        @product.price= "１２３"
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price out of setting range")
+      end
+      it "販売価格が半角英字では登録できない" do
+        @product.price=  "abc"
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price out of setting range")
+      end
+      it "販売価格が全角英字では登録できない" do
+        @product.price= "ＡＢＣ"
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price out of setting range")
+      end
 
+      
     end
   end
 end
