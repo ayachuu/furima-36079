@@ -9,9 +9,9 @@ class Product < ApplicationRecord
   has_one_attached :image
 
   with_options presence: true do
-    validates :user_id 
-    validates :image 
-    with_options numericality: { other_than: 1 , message: "can't be blank"} do
+    validates :user_id
+    validates :image
+    with_options numericality: { other_than: 1, message: "can't be blank" } do
       validates :category_id
       validates :condition_id
       validates :delivery_destination_id
@@ -19,7 +19,8 @@ class Product < ApplicationRecord
       validates :delivery_date_id
     end
   end
-  validates :name, presence: true, length: { maximum: 40, message: "商品名 は40文字以内で入力してください" }
-  validates :description, presence: true, length: { maximum: 1000, message: "商品の説明は1,000文字以内で入力してください" }
-  validates :price, presence: true, format: {with: /\A[0-9]+\z/}, numericality: {greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "out of setting range"}
+  validates :name, presence: true, length: { maximum: 40, message: '商品名 は40文字以内で入力してください' }
+  validates :description, presence: true, length: { maximum: 1000, message: '商品の説明は1,000文字以内で入力してください' }
+  validates :price, presence: true, format: { with: /\A[0-9]+\z/ },
+                    numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'out of setting range' }
 end
