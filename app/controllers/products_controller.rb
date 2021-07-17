@@ -17,6 +17,8 @@ class ProductsController < ApplicationController
       render new_product_path
     end
   end
+  def show
+  end
 
   private
 
