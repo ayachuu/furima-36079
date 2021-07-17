@@ -7,9 +7,10 @@ class Product < ApplicationRecord
   belongs_to :delivery_date
 
   has_one_attached :image
+  belongs_to :user
 
   with_options presence: true do
-    validates :user_id
+    validates :user
     validates :image
     with_options numericality: { other_than: 1, message: "can't be blank" } do
       validates :category_id
