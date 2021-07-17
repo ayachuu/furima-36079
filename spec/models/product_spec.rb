@@ -66,7 +66,7 @@ RSpec.describe Product, type: :model do
       it '販売価格が空では登録できない' do
         @product.price = ''
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price can't be blank", 'Price is invalid', 'Price out of setting range')
+        expect(@product.errors.full_messages).to include("Price can't be blank", "Price 半角数値で入力してください", "Price out of setting range")
       end
       it '販売価格が299円では登録できない' do
         @product.price = 299
