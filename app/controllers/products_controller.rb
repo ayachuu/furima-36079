@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   def index
     @product = Product.all
-    @product = Product.order(id: "DESC")
+    @product = Product.order(id: 'DESC')
   end
 
   def new
