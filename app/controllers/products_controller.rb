@@ -35,9 +35,7 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    if @product.destroy
-      redirect_to root_path
-    end
+    redirect_to root_path if @product.destroy
   end
 
   private
@@ -48,10 +46,9 @@ class ProductsController < ApplicationController
   end
 
   def move_to_path
-    unless current_user.id == @product.user_id
-      redirect_to action: :index
-    end
+    redirect_to action: :index unless current_user.id == @product.user_id
   end
+
   def make_instance
     @product = Product.find(params[:id])
   end
