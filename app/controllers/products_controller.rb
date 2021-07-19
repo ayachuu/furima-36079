@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit]
-  before_action :make_instance, only: [:show, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :edit, :destroy]
+  before_action :make_instance, only: [:show, :edit, :update, :destroy]
   before_action :move_to_path, only: [:edit, :update]
 
   def index
@@ -34,6 +34,10 @@ class ProductsController < ApplicationController
     end
   end
 
+  def destroy
+    redirect_to root_path if @product.destroy
+  end
+
   private
 
   def product_params
@@ -42,10 +46,9 @@ class ProductsController < ApplicationController
   end
 
   def move_to_path
-    unless current_user.id == @product.user_id
-      redirect_to action: :index
-    end
+    redirect_to action: :index unless current_user.id == @product.user_id
   end
+
   def make_instance
     @product = Product.find(params[:id])
   end
