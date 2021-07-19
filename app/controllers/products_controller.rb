@@ -44,6 +44,6 @@ class ProductsController < ApplicationController
 
   def move_to_path
     @product = Product.find(params[:id])
-    redirect_to action: :index 
+    redirect_to action: :index unless current_user.id == @product.user_id
   end
 end
