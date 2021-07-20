@@ -1,5 +1,9 @@
 class PurchaseRecordsController < ApplicationController
   def index
-    @purchase_record_retailer = PurchaseRecordRetailer.all
+    @purchase_record = PurchaseRecord.all
+  end
+
+  def create
+    binding.pry
   end
 end
