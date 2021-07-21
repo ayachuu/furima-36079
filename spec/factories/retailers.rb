@@ -6,6 +6,5 @@ FactoryBot.define do
     address       { "中区" }
     build_name    { "asdf" }
     phone_number  { "09099998888" }
-    association :purchase_record
   end
 end
