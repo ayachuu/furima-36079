@@ -46,7 +46,7 @@ class ProductsController < ApplicationController
   end
 
   def move_to_path
-    redirect_to action: :index unless current_user.id == @product.user_id
+    redirect_to action: :index if (current_user.id != @product.user_id) || @product.purchase_record.present?
   end
 
   def make_instance
