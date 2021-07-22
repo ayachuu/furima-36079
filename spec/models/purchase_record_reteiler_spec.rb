@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe PurchaseRecordReteiler, type: :model do
   before do
-    @purchase_record_retailer = FactoryBot.build(:purchase_record_reteiler)
+    user = FactoryBot.create(:user)
+    product = FactoryBot.create(:product)
+    @purchase_record_retailer = FactoryBot.build(:purchase_record_reteiler, user_id: user.id, product_id: product.id)
+    sleep 0.5
   end
   describe '発送先情報の登録' do
     context '登録ができるとき' do
@@ -11,7 +14,7 @@ RSpec.describe PurchaseRecordReteiler, type: :model do
       end
 
       it "建物名は空欄でも登録できる" do
-        @purchase_record_retailer.build_name = ''
+        @purchase_record_retailer.build_name = ""
         expect(@purchase_record_retailer).to be_valid
       end
     end
