@@ -4,7 +4,7 @@ class PurchaseRecordsController < ApplicationController
 
   def index
     @purchase_record_reteiler = PurchaseRecordReteiler.new
-    redirect_to root_path if (current_user == @product.user) && @product.present?
+    redirect_to root_path if (current_user == @product.user) || @product.purchase_record.present?
   end
 
   def create
