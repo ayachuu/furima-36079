@@ -1,7 +1,7 @@
 class PurchaseRecordReteiler
 
   include ActiveModel::Model
-  attr_accessor :post_code, :prefecture_id, :city, :address, :build_name, :phone_number, :user_id, :product_id
+  attr_accessor :post_code, :prefecture_id, :city, :address, :build_name, :phone_number, :user_id, :product_id, :token
   
   with_options presence: true do
     validates :user_id
@@ -9,6 +9,7 @@ class PurchaseRecordReteiler
     validates :prefecture_id, numericality: { other_than: 1 }
     validates :city
     validates :address
+    validates :token
   end
   validates :post_code,presence: true,format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
   validates :phone_number, presence: true, format: {with: /\A^0\d{10,11}$\z/}
