@@ -49,6 +49,12 @@ RSpec.describe PurchaseRecordReteiler, type: :model do
         expect(@purchase_record_retailer.errors.full_messages).to include("Prefecture can't be blank",
                                                                           'Prefecture is not a number')
       end
+      it '都道府県が1を選んでも登録できない' do
+        @purchase_record_retailer.prefecture_id = 1
+        @purchase_record_retailer.valid?
+        expect(@purchase_record_retailer.errors.full_messages).to include("Prefecture must be other than 1")
+      end
+
       it '市区町村が空では登録できない' do
         @purchase_record_retailer.city = ''
         @purchase_record_retailer.valid?
@@ -75,6 +81,12 @@ RSpec.describe PurchaseRecordReteiler, type: :model do
         @purchase_record_retailer.valid?
         expect(@purchase_record_retailer.errors.full_messages).to include('Phone number is invalid')
       end
+      it '電話番号が英数混合では登録できない' do
+        @purchase_record_retailer.phone_number = '123456abcd'
+        @purchase_record_retailer.valid?
+        expect(@purchase_record_retailer.errors.full_messages).to include('Phone number is invalid')
+      end
+
       it '郵便番号が全角数字では登録できない' do
         @purchase_record_retailer.phone_number = '１２３４５６７８９０１'
         @purchase_record_retailer.valid?
@@ -89,6 +101,16 @@ RSpec.describe PurchaseRecordReteiler, type: :model do
         @purchase_record_retailer.phone_number = 'ＡＢＣＥＦＧＨＩＪ'
         @purchase_record_retailer.valid?
         expect(@purchase_record_retailer.errors.full_messages).to include('Phone number is invalid')
+      end
+      it 'user_idが空では登録できないこと' do
+        @purchase_record_retailer.user_id = nil
+        @purchase_record_retailer.valid?
+        expect(@purchase_record_retailer.errors.full_messages).to include("User can't be blank")
+      end
+      it 'product_idが空では登録できないこと' do
+        @purchase_record_retailer.product_id = nil
+        @purchase_record_retailer.valid?
+        expect(@purchase_record_retailer.errors.full_messages).to include("Product can't be blank")
       end
       it 'tokenが空では登録できない' do
         @purchase_record_retailer.token = nil
