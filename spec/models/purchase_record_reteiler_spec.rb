@@ -13,8 +13,8 @@ RSpec.describe PurchaseRecordReteiler, type: :model do
         expect(@purchase_record_retailer).to be_valid
       end
 
-      it "建物名は空欄でも登録できる" do
-        @purchase_record_retailer.build_name = ""
+      it '建物名は空欄でも登録できる' do
+        @purchase_record_retailer.build_name = ''
         expect(@purchase_record_retailer).to be_valid
       end
     end
@@ -55,7 +55,7 @@ RSpec.describe PurchaseRecordReteiler, type: :model do
       it '都道府県が1を選んでも登録できない' do
         @purchase_record_retailer.prefecture_id = 1
         @purchase_record_retailer.valid?
-        expect(@purchase_record_retailer.errors.full_messages).to include("Prefecture must be other than 1")
+        expect(@purchase_record_retailer.errors.full_messages).to include('Prefecture must be other than 1')
       end
 
       it '市区町村が空では登録できない' do

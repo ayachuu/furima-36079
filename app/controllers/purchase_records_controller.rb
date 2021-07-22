@@ -2,7 +2,6 @@ class PurchaseRecordsController < ApplicationController
   before_action :authenticate_user!
   before_action :make_product
 
-
   def index
     @purchase_record_reteiler = PurchaseRecordReteiler.new
     redirect_to root_path if (current_user == @product.user) && @product.present?
@@ -30,7 +29,6 @@ class PurchaseRecordsController < ApplicationController
   def make_product
     @product = Product.find(params[:product_id])
   end
-  
 
   def pay_item
     Payjp.api_key = ENV['PAYJP_SECRET_KEY']
