@@ -6,7 +6,7 @@ RSpec.describe PurchaseRecordReteiler, type: :model do
   end
   describe "発送先情報の登録" do
     context "登録ができるとき" do
-      it "全ての項目が存在すれば、発送先情報を登録できる" do
+      it "tokenと全ての項目が存在すれば、発送先情報を登録できる" do
         expect(@purchase_record_retailer).to be_valid
       end
 
@@ -22,6 +22,24 @@ RSpec.describe PurchaseRecordReteiler, type: :model do
         @purchase_record_retailer.valid?
         expect(@purchase_record_retailer.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
       end
+      it '郵便番号が全角数字では登録できない' do
+        @purchase_record_retailer.post_code = '１１１１１１１'
+        @purchase_record_retailer.valid?
+        expect(@purchase_record_retailer.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
+
+      end
+      it '郵便番号が半角英字では登録できない' do
+        @purchase_record_retailer.post_code = 'abcdefg'
+        @purchase_record_retailer.valid?
+        expect(@purchase_record_retailer.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
+
+      end
+      it '郵便番号が全角英字では登録できない' do
+        @purchase_record_retailer.post_code = 'ＡＢＣＤＥＦＧ'
+        @purchase_record_retailer.valid?
+        expect(@purchase_record_retailer.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
+      end
+
       it "都道府県が空では登録できない" do
         @purchase_record_retailer.prefecture_id = ''
         @purchase_record_retailer.valid?
@@ -52,6 +70,29 @@ RSpec.describe PurchaseRecordReteiler, type: :model do
         @purchase_record_retailer.phone_number = "12345678901"
         @purchase_record_retailer.valid?
         expect(@purchase_record_retailer.errors.full_messages).to include("Phone number is invalid")
+      end
+      it '郵便番号が全角数字では登録できない' do
+        @purchase_record_retailer.phone_number = "１２３４５６７８９０１"
+        @purchase_record_retailer.valid?
+        expect(@purchase_record_retailer.errors.full_messages).to include("Phone number is invalid")
+
+      end
+      it '郵便番号が半角英字では登録できない' do
+        @purchase_record_retailer.phone_number = 'abcdefghij'
+        @purchase_record_retailer.valid?
+        expect(@purchase_record_retailer.errors.full_messages).to include("Phone number is invalid")
+
+      end
+      it '郵便番号が全角英字では登録できない' do
+        @purchase_record_retailer.phone_number = 'ＡＢＣＥＦＧＨＩＪ'
+        @purchase_record_retailer.valid?
+        expect(@purchase_record_retailer.errors.full_messages).to include("Phone number is invalid")
+
+      end
+      it "tokenが空では登録できない" do
+        @purchase_record_retailer.token = nil
+        @purchase_record_retailer.valid?
+        expect(@purchase_record_retailer.errors.full_messages).to include("Token can't be blank")
       end
 
     end
