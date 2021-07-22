@@ -9,6 +9,11 @@ RSpec.describe PurchaseRecordReteiler, type: :model do
       it 'tokenと全ての項目が存在すれば、発送先情報を登録できる' do
         expect(@purchase_record_retailer).to be_valid
       end
+
+      it "建物名は空欄でも登録できる" do
+        @purchase_record_retailer.build_name = ''
+        expect(@purchase_record_retailer).to be_valid
+      end
     end
     context '登録ができないとき' do
       it '郵便番号が空では登録できない' do
