@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
   before_action :make_instance, only: [:show, :edit, :update, :destroy]
   before_action :move_to_path, only: [:edit, :update]
+  before_action :move_to_root_path, only: [:edit, :update]
 
   def index
     @product = Product.order(id: 'DESC')
@@ -24,7 +25,6 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    redirect_to root_path if (current_user == @product.user) && @product.present?
   end
 
   def update
@@ -48,6 +48,10 @@ class ProductsController < ApplicationController
 
   def move_to_path
     redirect_to action: :index unless current_user.id == @product.user_id
+  end
+
+  def move_to_root_path
+    redirect_to root_path if (current_user == @product.user) && @product.present?
   end
 
   def make_instance
