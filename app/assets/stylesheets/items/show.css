@@ -104,6 +104,21 @@
   justify-content: space-between;
   position: relative;
 }
+.good-btn {
+  border-radius: 40px;
+  width: 15vw;
+  min-width: 200px;
+  color: blue;
+  border: 2px solid lightblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.favorite-star-icon {
+  margin-right: 5px;
+}
 
 .favorite-btn {
   border-radius: 40px;

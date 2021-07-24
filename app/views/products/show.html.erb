@@ -67,6 +67,21 @@
       </tbody>
     </table>
     <div class="option">
+      <div class="good-btn">
+        <% if user_signed_in?%>
+            <% if current_user.liked_by?(@product.id) %>
+                <%= link_to "いいね！を外す", destroy_like_path(@product), method: :delete %>
+                <%= @product.likes.count %>
+            <% else %>
+              <%= link_to "いいね！", create_like_path(@product.id), method: :POST %>
+              <%= @product.likes.count %>
+            <% end %>
+        <% else %>
+            <%= "いいね！" %>
+            <%= @product.likes.count %>
+        <% end %>
+          
+      </div>
       <div class="favorite-btn">
         <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
         <span>お気に入り 0</span>
