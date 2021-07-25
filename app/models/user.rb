@@ -17,6 +17,11 @@ class User < ApplicationRecord
   end
   validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i, message: '英字と数字の両方を含めて設定してください' }
 
-  has_many :products
+  has_many :products, through: :likes
   has_many :purchase_records
+  has_many :likes, dependent: :destroy
+
+  def liked_by?(product_id)
+    likes.where(product_id: product_id).exists?
+  end
 end

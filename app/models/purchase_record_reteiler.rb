@@ -17,4 +17,6 @@ class PurchaseRecordReteiler
     Retailer.create(post_code: post_code, prefecture_id: prefecture_id, city: city, address: address, build_name: build_name,
                     phone_number: phone_number, purchase_record_id: purchase_record.id)
   end
+
+  
 end
